@@ -23,11 +23,15 @@ my @family = ($papa_data, $leno_data, $ayu_data);
 my %ranking;
 for my $data (@family) {
     my @join_key;
-    for my $food (%$data->{foods}) {
+    for my $food ($data->{foods}) {
         push @join_key, @$food;
     }
     for my $key (@join_key) {
-        $ranking{$key} = $ranking{$key} + 1;
+        if (defined $ranking{$key}) {
+            $ranking{$key} = $ranking{$key} + 1;
+        } else {
+            $ranking{$key} = 1;
+        }
     }
 }
 
